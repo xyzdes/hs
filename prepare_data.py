@@ -51,7 +51,7 @@ def collect_data():
 
     # low quality samples (selected by collecting samples to
     # which the trained model assigned very low likelihood)
-    blacklist = set(np.load('data/blacklist.npy'))
+    blacklist = set(np.load('data/blacklist.npy', allow_pickle=True))
 
     stroke_fnames, transcriptions, writer_ids = [], [], []
     for i, fname in enumerate(fnames):
@@ -98,7 +98,7 @@ def collect_data():
     return stroke_fnames, transcriptions, writer_ids
 
 
-if __name__ == '__main__':
+def main():
     print('traversing data directory...')
     stroke_fnames, transcriptions, writer_ids = collect_data()
 
@@ -132,3 +132,6 @@ if __name__ == '__main__':
     np.save('data/processed/c.npy', c[valid_mask])
     np.save('data/processed/c_len.npy', c_len[valid_mask])
     np.save('data/processed/w_id.npy', w_id[valid_mask])
+
+if __name__ == '__main__':
+    main()
